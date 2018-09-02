@@ -1,0 +1,42 @@
+pragma solidity ^0.4.19;
+
+import "Invoice.sol";
+
+contract AccessInvoice {
+
+    mapping(address => Invoice) public InvoiceList;
+    
+    function setInvoice(string _senderName, string _senderAddr, string _senderPhone, 
+                        string _recieverName, string _recieverAddr, string _recieverPhone, 
+                        string _category, string _price ) public {
+        InvoiceList[msg.sender] = Invoice(_senderName, _senderAddr, _senderPhone, 
+                                        _recieverName, _recieverAddr, _recieverPhone, 
+                                        _category, _price);
+    }
+    
+    function getSenderName() public returns (string) {
+        return InvoiceList[msg.sender].senderName;
+    }
+    function getSenderAddr() public returns (string) {
+        return InvoiceList[msg.sender].senderAddr;
+    }
+    function getSenderPhone() public returns (string) {
+        return InvoiceList[msg.sender].senderPhone;
+    }
+    function getReceiverName() public returns (string) {
+        return InvoiceList[msg.sender].receiverName;
+    }
+    function getReceiverAddr() public returns (string) {
+        return InvoiceList[msg.sender].receiveraddr;
+    }
+    function getReceiverPhone() public returns (string) {
+        return InvoiceList[msg.sender].receiverPhone;
+    }
+    function getCategory() public returns (string) {
+        return InvoiceList[msg.sender].category;
+    }
+    function getPrice() public returns (string) {
+        return InvoiceList[msg.sender].price;
+    }
+    
+}
