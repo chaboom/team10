@@ -1,0 +1,31 @@
+pragma solidity ^0.4.19;
+
+contract FamilyInfo {
+    
+    struct Person {
+        string name;
+        string identity;
+        string transferDate;
+        string transferReason;
+        string relation;
+    }
+    
+    mapping(address => Person[]) familyInfo;
+    
+    function setFamily(string name, string identity, string transferDate, string transferReason, string relation) public {
+        familyInfo[msg.sender].push(Person(name, identity, transferDate, transferReason, relation));
+    }
+    function getFamilyCount() view public returns(uint) {
+        return familyInfo[msg.sender].length;
+    }
+    function getFamily(uint index) view public returns (string, string, string, string, string) {
+        return ( 
+            familyInfo[msg.sender][index].name,  
+            familyInfo[msg.sender][index].identity, 
+            familyInfo[msg.sender][index].transferDate,  
+            familyInfo[msg.sender][index].transferReason,  
+            familyInfo[msg.sender][index].relation
+        );
+    }
+    
+}

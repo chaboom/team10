@@ -1,0 +1,35 @@
+pragma solidity ^0.4.24;
+
+contract AccessMinwon {
+    
+    struct Person {
+        string name;
+        string identity;
+        string transferDate;
+        string transferReason;
+        string relation;
+    }
+    
+    struct House {
+        Person householder;
+        string houseAddr;
+    }
+    
+    mapping(address => House) houseInfo;
+    
+    function setHouseholder(string name, string identity, string transferDate, string transferReason, string relation, string houseAddr) public {
+        houseInfo[msg.sender].householder = Person(name, identity, transferDate, transferReason, relation);
+        houseInfo[msg.sender].houseAddr = houseAddr;   
+    }
+    
+    function getHouseholder() view public returns (string, string, string, string, string) {
+        return ( 
+            houseInfo[msg.sender].householder.name,  
+            houseInfo[msg.sender].householder.identity, 
+            houseInfo[msg.sender].householder.transferDate,  
+            houseInfo[msg.sender].householder.transferReason,  
+            houseInfo[msg.sender].householder.relation
+        );
+    }
+    
+}
